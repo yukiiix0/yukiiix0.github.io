@@ -4,7 +4,7 @@ title:  "My Journey into Cybersecurity: How I Got Started and What I’ve Learne
 date:   2025-07-07 16:00:00 +0530
 categories: Cybersecurity Journey
 ---
-## My Journey into Cybersecurity: How I Got Started and What I’ve Learned So Far
+
 
 Cybersecurity is a field that has fascinated me for quite some time. Like many others, I started my journey with little to no knowledge of what the field entailed. It all began when I participated in my college campus CTF (Capture the Flag) challenge. At that time, I didn’t even know what CTF was, nor did I understand the concepts of hacking.
 
