@@ -14,7 +14,7 @@ Since I didn’t know where to start, I decided to pursue the **Google Cybersecu
 
 With the guidance of experienced individuals in the field, I transitioned from theory to practice, gaining real-world experience through various platforms. **TryHackMe** and **Hack The Box** became great places to put my knowledge to the test in practical scenarios. Each room I completed brought new challenges and learning opportunities.
 
----
+
 
 ## Tools and Skills I’ve Developed
 
@@ -30,7 +30,7 @@ Throughout my cybersecurity journey, I’ve gained proficiency in essential tool
 
 These tools have helped me approach real-world security problems and enhanced my practical skills in the field.
 
----
+
 
 ## Capture the Flag (CTF) Challenges: My Path to Practical Cybersecurity
 
@@ -42,7 +42,7 @@ Participating in **Capture the Flag (CTF)** challenges has been one of the most 
 
 The combination of solving puzzles, exploiting vulnerabilities, and learning new tools has been a highly effective way to deepen my cybersecurity knowledge while keeping the process fun and competitive.
 
----
+
 
 ## What’s Next for Me?
 
@@ -50,6 +50,6 @@ The combination of solving puzzles, exploiting vulnerabilities, and learning new
 - **Consistent CTF Practice**: Solve challenges on Hack The Box, picoCTF, or TryHackMe.
 - **Landing a Job**: Work towards landing a cybersecurity job where I can apply my skills and grow professionally.
 
----
+
 
 Cybersecurity has taught me that you don’t need to know everything to get started—you just need **curiosity** and the **drive to keep going**. Every challenge solved, every new concept learned brings me one step closer to becoming the kind of professional I aspire to be.
