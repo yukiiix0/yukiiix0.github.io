@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Vulnnet-Active(Tryhackme) Writeup"
+title:  "Vulnnet-Active (Tryhackme) Writeup"
 date:   2026-01-16 13:00:00 +0530
 categories: Cybersecurity 
 ---
