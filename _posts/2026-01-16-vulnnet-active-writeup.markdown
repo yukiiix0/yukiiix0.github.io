@@ -66,7 +66,8 @@ Save
 ```
 
 ![](/assets/image/redis.png)
- In Responder, the NTLM hash is captured.
+
+In Responder, the NTLM hash is captured.
 
 ![](/assets/image/ntlm.png)
 save the NTLM hash to a file and crack it . I will be using hascat for this instance.
