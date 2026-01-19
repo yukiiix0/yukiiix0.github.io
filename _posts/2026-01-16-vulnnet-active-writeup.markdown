@@ -6,6 +6,8 @@ categories: Cybersecurity
 ---
 This is my first time writing a proper write-up for a TryHackMe room, and I wanted to document my learning process while solving it.
 The room focuses on attacking a Windows Active Directory machine, starting from enumeration and ending with full administrative access.
+
+
 **TryHackMe Room**: [VulnNet: Active](https://tryhackme.com/room/vulnnetactive)
 
 ## Enumeration 
@@ -46,6 +48,7 @@ Host script results:
 |_clock-skew: -1m24s
 
 ```
+
 ## Initial Foothold
 
 Among the discovered services, **Redis running on port 6379** stood out as unusual for a Windows domain environment. Redis is often misconfigured and, when exposed, can allow unauthorized access or credential leakage.
@@ -69,6 +72,7 @@ CONFIG SET dbfilename test.rdb
 Save
 ```
 
+
 ![](/assets/image/redis.png)
 
 In Responder, the NTLM hash is captured.
@@ -82,7 +86,9 @@ hashcat -m 5600 vulnet.txt /usr/share/wordlists/rockyou.txt -O
 
 password: sand_0873959498
 ```
+
 ![hascat](/assets/image/hashcat.png)
+
 
 ## Enumerate shares
 
@@ -148,6 +154,7 @@ Soon we will get the connection and navigate to  C:\Users\enterprise-security\De
 
 ![user flag](/assets/image/user.png)
 
+
 ## Privilege Escalation 
 
 Since the target is a **Windows machine**, the **Print Spooler service** is  considered as a potential attack vector and One well-known vulnerability affecting this service is **PrintNightmare**.
@@ -170,9 +177,11 @@ Invoke-Nightmare
 
 ```
 
+
 ![](/assets/image/invoke.png)
 
 This adds user `adm1n`/`P@ssw0rd` in the local admin group by default. 
+
 
 ## Post Exploitation 
 
