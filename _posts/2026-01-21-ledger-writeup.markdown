@@ -12,7 +12,7 @@ This write-up covers the Ledger TryHackMe room, which focuses on attacking a Win
 
 ## Enumeration 
 
-starting with the nmap scan . 
+Starting with the nmap scan . 
 
 ```
 ❯ nmap -p 1-10000 -Pn -sCV -O -T4 10.49.135.148
