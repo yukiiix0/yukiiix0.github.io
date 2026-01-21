@@ -2,7 +2,7 @@
 layout: post
 title:  "VulnNet: Active (TryHackMe) Writeup"
 date:   2026-01-16 13:00:00 +0530
-categories: Cybersecurity 
+categories: [TryHackMe, Active Directory]
 ---
 This is my first time writing a proper write-up for a TryHackMe room, and I wanted to document my learning process while solving it.
 The room focuses on attacking a Windows Active Directory machine, starting from enumeration and ending with full administrative access.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Ledger (TryHackMe) Writeup"
 date:   2026-01-21 13:00:00 +0530
-categories: [Cybersecurity, Active Directory, TryHackMe]
+categories: [TryHackMe, Active Directory]
 ---
 
 This write-up covers the Ledger TryHackMe room, which focuses on attacking a Windows Active Directory environment. The attack path begins with enumeration and credential discovery, followed by Active Directory enumeration and privilege escalation. The room highlights how misconfigurations in Active Directory Certificate Services (AD CS) can be abused to gain full administrative access.
