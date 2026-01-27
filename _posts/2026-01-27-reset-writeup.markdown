@@ -68,7 +68,7 @@ Host script results:
 |_clock-skew: mean: -1m48s, deviation: 0s, median: -1m48s
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 221.23 seconds
+Nmap done: 1 IP address (1 host up) scanned in 221.23 seconds.
 ```
 
 The result showed that the target is a Windows Active Directory Domain Controller. The domain was identified as **thm.corp** with the hostname **HAYSTACK**.
