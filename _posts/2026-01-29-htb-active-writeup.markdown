@@ -8,7 +8,7 @@ categories: [HackTheBox, Active Directory]
 
 **Active** is a Hack The Box (HTB) Windows Active Directory machine that focuses on SMB enumeration, Group Policy Objects (GPOs), and credential discovery. This machine is ideal for beginners in Active Directory exploitation and highlights why poor GPO hygiene can completely break domain security.
 
-**HackTheBox – Active:**  [Active](https://app.hackthebox.com/machines/Active)
+**HackTheBox:**  [Active](https://app.hackthebox.com/machines/Active)
 
  
 ## Enumeration
