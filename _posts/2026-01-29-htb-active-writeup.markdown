@@ -164,7 +164,7 @@ smb: \SVC_TGS\Desktop\> exit
 
 ```
 ❯ cat user.txt
-e2226c40521299cb1bc8e584a1112f38
+e2226c40521299cb1bc8e5**********
 ```
 
 ## Privilege Escalation 
@@ -209,6 +209,6 @@ Impacket v0.13.0 - Copyright Fortra, LLC and its affiliated companies
 [!] Press help for extra shell commands
 
 C:\Users\Administrator\Desktop>type root.txt
-2d878d1a3336d8abd9b09640204622aa
+2d878d1a3336d8abd9b09640********
 
 ```
