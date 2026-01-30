@@ -8,7 +8,7 @@ categories: [HackTheBox, Active Directory]
 
 **Sauna** is designed to teach Active Directory enumeration and exploitation on Windows. Instead of just brute-forcing a login, it walks you through a full AD attack chain — from deriving useful usernames to escalating privileges via legitimate AD features.
 
-**Hack The Box:  [Sauna](https://www.hackthebox.com/machines/sauna)
+**Hack The Box**:  [Sauna](https://www.hackthebox.com/machines/sauna)
 
 ## Enumeration
 
@@ -189,7 +189,7 @@ I used `bloodhound-python` to enumerate Active Directory objects and relationshi
 
 The service account **svc_loanmanager** had **DCSync** rights, allowing it to abuse directory replication permissions to extract password hashes for high-privileged domain accounts.
 
-!![](/assets/image/sauna/Screenshot%202026-01-30%20171347.png)
+![](/assets/image/sauna/Screenshot%202026-01-30%20171347.png)
 
 With **DCSync** privileges, I was able to abuse this permission using `secretsdump.py`. This attack allowed me to request a copy of Active Directory credential data directly from the Domain Controller. 
 
