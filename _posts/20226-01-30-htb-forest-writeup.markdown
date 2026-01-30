@@ -170,7 +170,7 @@ I was able to retrieve the **user flag** from the desktop.
 
 ## bloodhound
 
-With initial access as svc-alfresco, the next step was to enumerate Active Directory relationships and permissions to identify possible paths to Domain Administrator. For this, I used **bloodhound-python**.
+With initial access as user svc-alfresco, the next step was to enumerate Active Directory relationships and permissions to identify possible paths to Domain Administrator. For this, I used **bloodhound-python**.
 
 ```
 ❯ bloodhound-python \                                 
