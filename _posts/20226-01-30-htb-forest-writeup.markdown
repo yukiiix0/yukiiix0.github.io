@@ -139,7 +139,6 @@ Impacket v0.13.0 - Copyright Fortra, LLC and its affiliated companies
 [-] User sebastien doesn't have UF_DONT_REQUIRE_PREAUTH set
 [-] User santi doesn't have UF_DONT_REQUIRE_PREAUTH set
 [-] User lucinda doesn't have UF_DONT_REQUIRE_PREAUTH set
-[-] User administrator doesn't have UF_DONT_REQUIRE_PREAUTH set
 $krb5asrep$23$svc-alfresco@HTB.LOCAL:fbcf02fcf9f4cceb5925005977036b17$1a1a3ba156f634315ea86bac9a67a5ba9247545a3d887776dac5bb79528c362233600a2a770d427a6920ea80a094c4839fe7e2ead4d2a6d97e57d5a4b52b666429971994bde4fc4a0978d4defe13b938d982bd09ff8adbff3e22cb2388fed8751b3c4352d6aaf600a61282f4e6d06ff88f9664d6381e5dfa00946768d14dba6a983580ddae31f87a6d1bdcfc4eecc70c887da2e3db630ae1854df994450ee4338cd450b27235a87c9bbbad138b9c1c6874e5eb16b2305dc8378ff62368fe5c229edcb037b788bd6fffac9f10a8ed4fa67b028a3a39d4fa2982186f2122bf790369a3a0db1250
 ```
 
