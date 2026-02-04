@@ -6,7 +6,7 @@ categories: [HackTheBox, Active Directory]
 ---
 
 
-Escape is a Windows Active Directory machine from **Hack The Box** that focuses on identifying and abusing enterprise Active Directory misconfigurations**, with a strong emphasis on Active Directory Certificate Services (AD CS).
+**Escape** is a Windows Active Directory machine from **Hack The Box** that focuses on identifying and abusing enterprise Active Directory misconfigurations**, with a strong emphasis on Active Directory Certificate Services (AD CS).
 
 **Hack The Box:  [Escape](https://app.hackthebox.com/machines/Escape)
 
@@ -96,9 +96,6 @@ Host script results:
 | smb2-time: 
 |   date: 2026-02-02T13:08:19
 |_  start_date: N/A
-
-OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 373.51 second.
 
 ```
 
