@@ -6,7 +6,7 @@ categories: [HackTheBox, Active Directory]
 ---
 
 
-**Escape** is a Windows Active Directory machine from **Hack The Box** that focuses on identifying and abusing enterprise Active Directory misconfigurations**, with a strong emphasis on Active Directory Certificate Services (AD CS).
+**Escape** is a Windows Active Directory machine from **Hack The Box** that focuses on identifying and abusing enterprise Active Directory misconfigurations, with a strong emphasis on Active Directory Certificate Services (AD CS).
 
 **Hack The Box**:  [Escape](https://app.hackthebox.com/machines/Escape)
 
