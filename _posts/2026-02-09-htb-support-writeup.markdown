@@ -56,7 +56,7 @@ Host script results:
 The result showed that the machine is a Windows Domain Controller with most of the AD services running. The domain was identified as `support.htb`.
 
 I started enumerating the shares using `smbclient` and found one non default share called `support-tools`. I further enumerated the
-content of the found share and there were a lot of support tools which are publicly available except for the `UserInfo.exe`. So, I downloaded the .zip file on my local machine to look further into it.
+content of the found share and there were a lot of  executable files which are publicly available except for the `UserInfo.exe`. So, I downloaded the .zip file on my local machine to look further into it.
 
 ```
 smbclient -L \\\\10.129.230.181\\        
@@ -93,7 +93,7 @@ smb: \> get UserInfo.exe.zip
 getting file \npp.8.4.1.portable.x64.zip of size 5439245 as npp.8.4.1.portable.x64.zip getting file \UserInfo.exe.zip of size 277499 as UserInfo.exe.zip (82.9 KiloBytes/sec) (average 174.7 KiloBytes/sec)
 ```
 
-After extracting the content of the .zip file, I analyzed `UserInfo.exe` using **dnSpy**.
+After extracting the content of the .zip file, I got an executable file called `UserInfo.exe`, running file command on it - I discovered that it's a dot net executable. So I utilized **dnspy** to analyze it.
 
 Analyzing it revealed an `LdapQuery` class which is responsible for interacting with Active Directory. In its constructor, the application retrieves the decrypted password by calling `Protected.getPassword()` and uses it to authenticate to the domain via LDAP as the user `support\ldap`
 
